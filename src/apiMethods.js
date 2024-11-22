@@ -10,9 +10,24 @@
 
 import axios from "axios";
 
-const baseUrl = "https://reqres.in/";
+const baseUrl = "https://reqres.in/api/";
 
-export const getUsers = () => {};
+export const getUsers = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}users`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
+};
 
-// Bonus:
-export const deleteUser = () => {};
+export const deleteUser = async (id) => {
+  try {
+    await axios.delete(`${baseUrl}users/${id}`);
+    return id;
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return null;
+  }
+};
